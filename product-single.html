@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add New Product</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="gray-styles.css">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				
+			</div>
+			<ul class="navbar-nav nav navbar-right">
+				<li class="active"><a href="index.html">Home</a></li>
+				<li class="active"><a href="add-product.html">+ Add Product</a></li>
+			</ul>
+		</div>
+	</nav>
+	<br><br/><br/>
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+			<div id="row">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<img src="images/b3.jpg" class="img-responsive img-rounded" id="product-img">
+					</div>
+				</div>
+				<div class="col-md-8">
+					<ul class="list-group">
+						<li class="list-group-item"><strong><span id="product-name">Belgium shaddy Bag</span></strong><span id="product-price" class="badge">15,000</span></li>
+						<li class="list-group-item"><strong>Description</strong><br/><span id="product-desc">Italian Bag for fashionist</span></li>
+						<li class="list-group-item"><strong>Category : </strong><span id="product-cat"> Wears</span></li>
+						<li class="list-group-item"><strong>Color : </strong><span id="product-color">Red</span></li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="lib/jquery/jquery.js"></script>
+<script type="text/javascript">
+	let a = window.location.search.replace(/[^0-9]+/, "");
+	$.get("api.php?product_id="+a, function(d, s){
+		console.log(d);
+		try{
+			var jsonData = JSON.parse(d);
+			$("#product-img").attr("src", jsonData.image);
+			$("#product-name").html(jsonData.product_name);
+			$("#product-price").html(jsonData.price);
+			$("#product-cat").html(jsonData.category);
+			$("#product-desc").html(jsonData.attr.description);
+			$("#product-color").html(jsonData.attr.color);
+		}catch(e){
+
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shopping Cart Graymerge</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="gray-styles.css">
+	<script type="text/javascript" src="lib/jquery/jquery.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				
+			</div>
+			<ul class="navbar-nav nav navbar-right">
+				<li class="active"><a href="add-product.html">+ Add Product</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<div>
+			<a href="#"><div style="background: url(images/cart.png); width:50px;height:50px;background-size: cover;text-align:center;float:right"><span style="font-size: 30px;text-shadow:1px 1px red;color:#eee" id="cart-item">0</span>-<span id="cart-price">20000</span></div></a>
+		</div>
+		<div class="text-center"><h1>Shopping Cart</h1><hr/></div>
+		<div class="row" id="row">
+			
+		</div>
+	</div>
+	<div id="blank">
+		<div id="roller"></div>
+	</div>
+	<script type="text/javascript">
+		(function(){
+			function updateCart(){
+				$.get("api.php?get_price=true", function(data, status){
+					//console.log(data);
+					try{
+						var response = JSON.parse(data);
+						$("#cart-price").html("₦"+response.total_price_string);
+						$("#cart-item").html(response.total_items);
+					}catch(e){
+
+					}
+				})
+			}
+			function addToCart(e){
+				e.preventDefault();
+				var id = $(this).attr("data-id");
+				$("#blank").fadeIn(300);
+				$.post("api.php", {add:id}, function(data, status){
+					$("#blank").fadeOut(300);
+					updateCart();
+				})
+			}
+			function init(){
+				$(".add-to-cart").off("click");
+				$(".add-to-cart").on("click", addToCart);
+			}
+			$.get("products.php", function(data, status){
+				var ht = "";
+				for(x in data){
+					ht += `<div class="col-md-4"><div class="thumbnail">`;
+					ht += `<img src="`+data[x].image+`" class="img-responsive">`;
+					ht += `<div class="caption">`;
+					ht += `<p><a href="product-single.html?id=`+x+`">`+data[x].product_name+`<br/>₦`+data[x].price+`</a></p>`;
+					ht += `</div>`;
+					ht += `<div class="row"><div class="col-lg-12"><a href="#" class="btn btn-primary btn-block add-to-cart" data-id="`+x+`">Add To Cart</a></div></div>`;
+					ht += "</div></div>";
+				}
+				$("#row").html(ht);
+				$("#blank").hide();
+				init();
+			});
+			updateCart();
+		})();
+	</script>
+</body>
+</html>

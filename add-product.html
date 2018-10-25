@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add New Product</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="gray-styles.css">
+	<link rel="stylesheet" type="text/css" href="lib/validator.css">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				
+			</div>
+			<ul class="navbar-nav nav navbar-right">
+				<li class="active"><a href="index.html">HOME</a></li>
+			</ul>
+		</div>
+	</nav>
+	<br><br/><br/>
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+			<form action="api.php" method="post" enctype="multipart/form-data" id="myform">
+				<div class="form-group">
+					<label>Product Name</label>
+					<input type="text" name="product-name" class="form-control" required="true">
+				</div>
+				<div class="form-group">
+					<label>Product Price</label>
+					<input type="number" name="product-price" class="form-control" required="true">
+				</div>
+				<div class="form-group">
+					<label>Product Description</label>
+					<textarea type="text" name="product-desc" class="form-control" data-count="#count" data-max="500" required="true"></textarea>
+					<span id="count">0</span> <span> out of 500</span> 
+				</div>
+				<div class="form-group">
+					<label>Product Category</label>
+					<select type="text" name="product-category" class="form-control" required="true">
+						<option>Wears</option>
+						<option>Electronics</option>
+						<option>Kitchen</option>
+						<option>Construction</option>
+						<option>Beverages</option>
+						<option>Power</option>
+						<option>Automobile</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Product Color</label>
+					<input type="text" name="product-color" class="form-control" required="true">
+				</div>
+				<div class="form-group">
+					<label>Product Image</label>
+					<input type="file" name="product-image" class="form-control"  required="true" required="true" data-max="512000">
+					<p class="help-block">Image should not be more than 500kb</p>
+				</div>
+				<div>
+					<input type="button" name="" value="Add Product" id="add-product-btn">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="lib/validator.js"></script>
+<script type="text/javascript">
+	$("#add-product-btn").click(function(e){
+		var status = $().matrixV("#myform");
+		if(status){
+			alert("Form is good to go");
+			document.getElementById("myform").submit();
+		}
+		else{
+			$("#myform").addClass("form-error");
+			setTimeout(function(){
+				$("#myform").removeClass("form-error");
+			}, 1000);
+		}
+	})
+</script>
+</body>
+</html>

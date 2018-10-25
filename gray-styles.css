@@ -1,0 +1,48 @@
+#blank {
+    	width:100%;
+    	position:fixed;
+    	background:rgba(0,100,0,0.1);
+    	height: 100%;
+    	z-index:10000;
+    	top:0;
+    	display: none
+    }
+    #roller {
+    	width:50px; 
+		height:50px; 
+		border-left:5px solid #23ba85;
+		border-top:5px solid #fff;
+		border-bottom:5px solid #fff;
+		border-right:5px solid #23ba85; 
+		position: relative; 
+		top:40%; 
+		margin:0 auto; 
+		border-radius:100%; 
+		-webkit-animation: move 1s ease-in-out infinite; 
+		-moz-animation: move 1s ease-in-out infinite; 
+		-ms-animation: move 1s ease-in-out infinite; 
+		animation: move 1s ease-in-out infinite; 
+		/*background: radial-gradient(closest-corner at 40px 40px, #cfcfcf 0%, #eaeaea 63%)*/
+	}
+    @-webkit-keyframes move{
+      0% {-webkit-transform:rotateX(0deg); }
+      50% {-webkit-transform:rotateX(90deg); }
+      100% {-webkit-transform:rotateX(360deg); }
+    }
+    @keyframes move{
+      0% {transform:rotate(0deg); }
+      50% {transform:rotate(90deg); }
+      100% {transform:rotate(360deg);}
+    }
+    @-ms-keyframes move{
+      0% {-ms-transform:rotate(0deg); }
+      50% {-ms-transform:rotate(90deg);}
+      100% {-ms-transform:rotate(360deg); }
+    }
+    @-moz-keyframes move{
+      0% {-moz-transform:rotate(0deg); }
+      50% {-moz-transform:rotate(90deg);}
+      100% {-moz-transform:rotate(360deg);}
+    }
+    
+    .input-lg {min-height: 50px}
