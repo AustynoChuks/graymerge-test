@@ -17,4 +17,9 @@ POST api.php parameters add=[product_id]
 
 "#Get the total items in a cart including sum-total amount"
 GET api.php parameter get_price=true
-(i.e (i.e https://nameless-gorge-99473.herokuapp.com/api.php?get_price=true))
+ (i.e GET https://nameless-gorge-99473.herokuapp.com/api.php?get_price=true)
+
+
+"#Add a product to the shop"
+POST api.php parameters {"product-price":string, "product-price":number, "product-category":string, "product-desc":string, "product-color":string, "product-image":blob}
+(i.e POST parameters https://nameless-gorge-99473.herokuapp.com/api.php)
